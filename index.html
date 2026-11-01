@@ -53,7 +53,7 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 30px 40px;
+          padding: 25px 40px;
           z-index: 1000;
           border-bottom: 1px solid transparent;
           transition: var(--transition-smooth);
@@ -63,6 +63,10 @@
           flex: 1;
           display: flex;
           align-items: center;
+        }
+
+        .header-left {
+          justify-content: flex-start;
         }
 
         .header-right {
@@ -78,8 +82,8 @@
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          border: 1px solid var(--text-main);
-          color: var(--text-main);
+          border: 1px solid #FFFFFF;
+          color: #FFFFFF;
           text-decoration: none;
           font-size: 0.9rem;
           opacity: 0;
@@ -89,24 +93,49 @@
         }
 
         .scroll-to-top:hover {
-          background-color: var(--text-main);
-          color: #FFFFFF;
+          background-color: #FFFFFF;
+          color: var(--text-main);
         }
 
         header.scrolled .scroll-to-top {
           opacity: 1;
           visibility: visible;
           transform: translateY(0);
+          border-color: var(--text-main);
+          color: var(--text-main);
         }
 
-        .logo {
-          font-size: 1.1rem;
+        header.scrolled .scroll-to-top:hover {
+          background-color: var(--text-main);
+          color: #FFFFFF;
+        }
+
+        /* Topp-logo (bilde) - vises øverst */
+        .top-logo {
+          max-width: 180px;
+          height: auto;
+          display: block;
+          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+          transition: var(--transition-smooth);
+        }
+
+        /* Tekst-logo som skjules når man er øverst, og vises når man scroller */
+        .scrolled-title {
+          font-size: 0.95rem;
           font-weight: 500;
           letter-spacing: 0.15em;
           text-decoration: none;
-          color: #FFFFFF;
+          color: var(--text-main);
+          display: none; /* Skjult som standard */
           transition: var(--transition-smooth);
-          text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header.scrolled .top-logo {
+          display: none; /* Skjul bilde-logoen ved scrolling */
+        }
+
+        header.scrolled .scrolled-title {
+          display: block; /* Vis tekst-tittelen ved scrolling */
         }
 
         .nav-links {
@@ -130,6 +159,48 @@
           color: #E0D5C1;
         }
 
+        /* Hamburgermeny-knapp (skjult på desktop) */
+        .menu-toggle {
+          display: none;
+          background: none;
+          border: none;
+          cursor: pointer;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 24px;
+          height: 18px;
+          padding: 0;
+          z-index: 1001;
+          position: relative;
+        }
+
+        .menu-toggle span {
+          display: block;
+          width: 100%;
+          height: 2px;
+          background-color: #FFFFFF;
+          transition: var(--transition-smooth);
+          box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+          transform-origin: center;
+        }
+
+        header.scrolled .menu-toggle span {
+          background-color: var(--text-main);
+          box-shadow: none;
+        }
+
+        /* Animasjon for at hamburgeren blir til en X når den er aktiv */
+        .menu-toggle.active span:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+          transform: scale(0);
+        }
+        .menu-toggle.active span:nth-child(3) {
+          transform: translateY(-8px) rotate(-45deg);
+        }
+
         /* Navigasjon - Stil når man scroller ned */
         header.scrolled {
           background-color: rgba(250, 250, 250, 0.95);
@@ -139,7 +210,6 @@
           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
         }
 
-        header.scrolled .logo,
         header.scrolled .nav-links a {
           color: var(--text-main);
           text-shadow: none;
@@ -186,16 +256,16 @@
         }
 
         .hero-subtitle {
-          font-size: 0.85rem;
+          font-size: 1rem;
           letter-spacing: 0.25em;
-          color: #E0D5C1;
+          color: #ffffff;
           text-transform: uppercase;
           margin-bottom: 15px;
         }
 
         .hero-title {
-          font-size: 2.8rem;
-          font-weight: 300;
+          font-size: 4rem;
+          font-weight: 350;
           line-height: 1.4;
           margin: 0 0 40px 0;
           color: #FFFFFF;
@@ -446,7 +516,7 @@
         }
 
         .footer-logo {
-          max-width: 320px; /* Gjort enda større her */
+          max-width: 320px;
           height: auto;
           display: block;
         }
@@ -476,43 +546,69 @@
         /* Mobil-tilpasninger (responsivt design) */
         @media (max-width: 768px) {
           header {
-            flex-direction: column;
-            padding: 12px 16px;
-            gap: 8px;
-            background-color: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(6px);
+            padding: 16px 20px;
           }
 
-          .header-left, .header-right {
-            width: 100%;
-            justify-content: center;
+          .header-left {
+            flex: 1;
+            justify-content: flex-start;
           }
 
           .header-right {
-            gap: 12px;
-          }
-
-          .logo {
-            font-size: 0.75rem;
-            text-align: center;
-            letter-spacing: 0.08em;
+            flex: 0;
+            width: auto;
+            gap: 15px;
           }
 
           .scroll-to-top {
-            width: 26px;
-            height: 26px;
-            font-size: 0.75rem;
+            order: -1;
           }
 
+          .top-logo {
+            max-width: 130px;
+          }
+
+          .scrolled-title {
+            font-size: 0.65rem;
+            text-align: left;
+          }
+
+          .menu-toggle {
+            display: flex;
+          }
+
+          /* Mobilmeny som glir pent ut fra høyre side (drawer-stil) eller ned fra headeren */
           .nav-links {
-            gap: 12px;
-            flex-wrap: nowrap;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: rgba(30, 30, 30, 0.98);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            gap: 30px;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+            list-style: none;
+            margin: 0;
+            z-index: 999;
+          }
+
+          .nav-links.active {
+            right: 0;
           }
 
           .nav-links a {
-            font-size: 0.7rem;
-            letter-spacing: 0.05em;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            color: #FFFFFF !important;
+            text-shadow: none !important;
           }
 
           .hero {
@@ -520,7 +616,7 @@
           }
 
           .hero-title {
-            font-size: 1.7rem;
+            font-size: 2.2rem;
             line-height: 1.4;
           }
 
@@ -529,7 +625,7 @@
           }
 
           .footer-logo {
-            max-width: 100%; /* Sørger for at logoen tilpasser seg mobilenpent */
+            max-width: 100%;
           }
         }
 
@@ -555,15 +651,23 @@
     <!-- Toppmeny -->
     <header id="mainHeader">
         <div class="header-left">
-            <a href="#" class="logo">HUSTEGNER NINA KJØLSEN JERNÆS</a>
+            <a href="#">
+                <img src="Logo.png" alt="Hustegner Nina Kjølsen Jernæs Logo" class="top-logo">
+            </a>
+            <a href="#" class="scrolled-title">HUSTEGNER NINA KJØLSEN JERNÆS</a>
         </div>
 
         <div class="header-right">
             <a href="#" class="scroll-to-top" title="Til toppen">&uarr;</a>
-            <ul class="nav-links">
-                <li><a href="#tegninger">Tegninger</a></li>
-                <li><a href="#bestill">Bestill</a></li>
-                <li><a href="#about">Om meg</a></li>
+            <button class="menu-toggle" id="menuToggle" aria-label="Åpne meny">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#tegninger" class="nav-item">Tegninger</a></li>
+                <li><a href="#bestill" class="nav-item">Bestill</a></li>
+                <li><a href="#about" class="nav-item">Om meg</a></li>
             </ul>
         </div>
     </header>
@@ -571,7 +675,7 @@
     <!-- Hovedseksjon (Hero) -->
     <section class="hero animate-fade-up">
         <span class="hero-subtitle">Med kjærlighet for eldre hus</span>
-        <h1 class="hero-title">Formet av generasjoner, tegnet for evigheten</h1>
+        <h1 class="hero-title">Formet av generasjoner,<br> tegnet for evigheten</h1>
     </section>
 
     <!-- Tegninger-seksjon -->
@@ -698,7 +802,7 @@
         </div>
     </footer>
 
-    <!-- Skript for scrolling, bildebeskyttelse og AJAX-skjema -->
+    <!-- Skript for scrolling, bildebeskyttelse, hamburgermeny og AJAX-skjema -->
     <script>
         window.addEventListener('scroll', function() {
             const header = document.getElementById('mainHeader');
@@ -707,6 +811,23 @@
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+
+        // Toggle for hamburgermeny på mobil (og forvandling til X)
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Lukk menyen automatisk når man klikker på et menypunkt
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
         });
 
         // Deaktiver høyreklikk på bilder for å beskytte dem
