@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hustegner Nina Kjølsen Jernæs | Personlige tegninger av gamle hus og gårdstun</title>
+    <meta name="description" content="Få en personlig og detaljert tegning av ditt eldre hus eller gårdstun. Hustegner Nina Kjølsen Jernæs tar imot bestillinger fra hele landet.">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================================
+           GRUNNLEGGENDE STILER OG DESIGNFARGESYSTEM
+           ========================================================================== */
+
+        html {
+          scroll-behavior: smooth;
+        }
+
+        :root {
+          --bg-color: #FAFAFA;          /* Varm, lys off-white bakgrunn */
+          --surface-color: #FFFFFF;     /* Rent hvit for kort og bokser */
+          --text-main: #2C2C2C;         /* Myk mørkegrå */
+          --text-muted: #767676;        /* Subtil grå for beskrivelser */
+          --accent-color: #A38C73;      /* Dempet jord-/sandtone */
+          --border-color: #E5E5E5;      /* Delikat, lys grå grense */
+          --font-family: "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+          --radius-sm: 4px;
+          --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          background-color: var(--bg-color);
+          color: var(--text-main);
+          font-family: var(--font-family);
+          line-height: 1.8;
+          letter-spacing: 0.05em;
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+          -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigasjon - Standardstil (øverst på hero-bilde) */
+        header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background-color: transparent;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 30px 40px;
+          z-index: 1000;
+          border-bottom: 1px solid transparent;
+          transition: var(--transition-smooth);
+        }
+
+        .header-left, .header-right {
+          flex: 1;
+          display: flex;
+          align-items: center;
+        }
+
+        .header-right {
+          justify-content: flex-end;
+          gap: 20px;
+        }
+
+        /* Pil for å rulle til toppen */
+        .scroll-to-top {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 1px solid var(--text-main);
+          color: var(--text-main);
+          text-decoration: none;
+          font-size: 0.9rem;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-5px);
+          transition: var(--transition-smooth);
+        }
+
+        .scroll-to-top:hover {
+          background-color: var(--text-main);
+          color: #FFFFFF;
+        }
+
+        header.scrolled .scroll-to-top {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+
+        .logo {
+          font-size: 1.1rem;
+          font-weight: 500;
+          letter-spacing: 0.15em;
+          text-decoration: none;
+          color: #FFFFFF;
+          transition: var(--transition-smooth);
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 30px;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .nav-links a {
+          text-decoration: none;
+          color: #FFFFFF;
+          font-size: 0.85rem;
+          letter-spacing: 0.1em;
+          transition: var(--transition-smooth);
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links a:hover {
+          color: #E0D5C1;
+        }
+
+        /* Navigasjon - Stil når man scroller ned */
+        header.scrolled {
+          background-color: rgba(250, 250, 250, 0.95);
+          backdrop-filter: blur(10px);
+          padding: 18px 40px;
+          border-bottom: 1px solid var(--border-color);
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        header.scrolled .logo,
+        header.scrolled .nav-links a {
+          color: var(--text-main);
+          text-shadow: none;
+        }
+
+        header.scrolled .nav-links a:hover {
+          color: var(--accent-color);
+        }
+
+        /* Hero Seksjon */
+        .hero {
+          position: relative;
+          height: 100vh;
+          width: 100%;
+          max-width: none !important;
+          margin: 0 !important;
+          padding: 180px 20px 50px 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          text-align: center;
+          background-image: url('Bilde01.jpeg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          color: #FFFFFF;
+        }
+
+        .hero::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.40);
+          z-index: 1;
+        }
+
+        .hero > * {
+          position: relative;
+          z-index: 2;
+        }
+
+        .hero-subtitle {
+          font-size: 0.85rem;
+          letter-spacing: 0.25em;
+          color: #E0D5C1;
+          text-transform: uppercase;
+          margin-bottom: 15px;
+        }
+
+        .hero-title {
+          font-size: 2.8rem;
+          font-weight: 300;
+          line-height: 1.4;
+          margin: 0 0 40px 0;
+          color: #FFFFFF;
+        }
+
+        /* Seksjoner generelt */
+        section {
+          padding: 100px 20px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .section-header {
+          text-align: center;
+          margin-bottom: 40px;
+        }
+
+        .section-subtitle {
+          font-size: 0.8rem;
+          letter-spacing: 0.2em;
+          color: var(--accent-color);
+          text-transform: uppercase;
+          margin-bottom: 10px;
+          display: block;
+        }
+
+        .section-title {
+          font-size: 2rem;
+          font-weight: 400;
+          color: var(--text-main);
+          margin: 0;
+        }
+
+        /* Kort / Grid Layout */
+        .card-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 40px;
+        }
+
+        .content-card {
+          background: var(--surface-color);
+          border-radius: var(--radius-sm);
+          overflow: hidden;
+          border: 1px solid var(--border-color);
+          transition: var(--transition-smooth);
+          display: block;
+        }
+
+        .content-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-image-wrapper {
+          overflow: hidden;
+          position: relative;
+          aspect-ratio: 4 / 3;
+        }
+
+        .card-image-wrapper img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .content-card:hover .card-image-wrapper img {
+          transform: scale(1.05);
+        }
+
+        .card-content {
+          padding: 30px;
+        }
+
+        .card-category {
+          font-size: 0.75rem;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          margin-bottom: 8px;
+          display: block;
+        }
+
+        .card-title {
+          font-size: 1.2rem;
+          font-weight: 400;
+          margin: 0 0 10px 0;
+          color: var(--text-main);
+        }
+
+        /* Om meg bilde-stil */
+        .about-image-container {
+          max-width: 600px;
+          margin: 40px auto 0 auto;
+          border-radius: var(--radius-sm);
+          overflow: hidden;
+          border: 1px solid var(--border-color);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+          aspect-ratio: 16 / 10;
+        }
+
+        .about-image-container img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        /* Skjema Stiler */
+        .order-form-container {
+          max-width: 700px;
+          margin: 40px auto 0 auto;
+          background: var(--surface-color);
+          padding: 40px;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--border-color);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        }
+
+        .form-group {
+          margin-bottom: 25px;
+        }
+
+        .form-group label {
+          display: block;
+          font-size: 0.85rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-bottom: 8px;
+          color: var(--text-main);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group textarea {
+          width: 100%;
+          padding: 14px 16px;
+          font-family: var(--font-family);
+          font-size: 0.95rem;
+          background-color: var(--bg-color);
+          border: 1px solid var(--border-color);
+          border-radius: var(--radius-sm);
+          color: var(--text-main);
+          transition: var(--transition-smooth);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+          outline: none;
+          border-color: var(--accent-color);
+          background-color: #FFFFFF;
+        }
+
+        .form-group textarea {
+          resize: vertical;
+          min-height: 140px;
+        }
+
+        /* Sjekkboks (Nyhetsbrev) */
+        .form-checkbox-group {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          margin-bottom: 25px;
+          font-size: 0.9rem;
+          color: var(--text-main);
+          cursor: pointer;
+        }
+
+        .form-checkbox-group input[type="checkbox"] {
+          width: 18px;
+          height: 18px;
+          margin-top: 3px;
+          accent-color: var(--accent-color);
+          cursor: pointer;
+        }
+
+        .btn-submit {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          padding: 16px;
+          background-color: var(--text-main);
+          color: #FFFFFF;
+          border: none;
+          border-radius: var(--radius-sm);
+          font-size: 0.85rem;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: var(--transition-smooth);
+        }
+
+        .btn-submit:hover {
+          background-color: var(--accent-color);
+        }
+
+        /* Melding når skjema er sendt */
+        #formStatus {
+          margin-top: 20px;
+          text-align: center;
+          font-size: 0.95rem;
+          color: var(--accent-color);
+          font-weight: 500;
+          display: none;
+        }
+
+        /* Footer Stiler */
+        footer {
+          background-color: #262626;
+          color: #A8A8A8;
+          padding: 80px 40px 40px 40px;
+          font-size: 0.8rem;
+          letter-spacing: 0.1em;
+          border-top: 1px solid #333333;
+        }
+
+        .footer-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 40px;
+          margin-bottom: 50px;
+          align-items: center;
+        }
+
+        .footer-col {
+          flex: 1;
+          min-width: 250px;
+        }
+
+        .footer-col h4 {
+          color: #FFFFFF;
+          font-size: 0.95rem;
+          font-weight: 400;
+          letter-spacing: 0.15em;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+        }
+
+        .footer-col p {
+          margin: 0 0 10px 0;
+          color: #C2C2C2;
+        }
+
+        .footer-logo {
+          max-width: 320px; /* Gjort enda større her */
+          height: auto;
+          display: block;
+        }
+
+        .footer-divider {
+          max-width: 1200px;
+          margin: 0 auto;
+          border: none;
+          border-top: 1px solid #3B3B3B;
+        }
+
+        .footer-bottom {
+          max-width: 1200px;
+          margin: 25px auto 0 auto;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 10px;
+          font-size: 0.75rem;
+          color: #888888;
+        }
+
+        .footer-bottom p {
+          margin: 0;
+        }
+
+        /* Mobil-tilpasninger (responsivt design) */
+        @media (max-width: 768px) {
+          header {
+            flex-direction: column;
+            padding: 12px 16px;
+            gap: 8px;
+            background-color: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(6px);
+          }
+
+          .header-left, .header-right {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .header-right {
+            gap: 12px;
+          }
+
+          .logo {
+            font-size: 0.75rem;
+            text-align: center;
+            letter-spacing: 0.08em;
+          }
+
+          .scroll-to-top {
+            width: 26px;
+            height: 26px;
+            font-size: 0.75rem;
+          }
+
+          .nav-links {
+            gap: 12px;
+            flex-wrap: nowrap;
+            justify-content: center;
+          }
+
+          .nav-links a {
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+          }
+
+          .hero {
+            padding-top: 150px;
+          }
+
+          .hero-title {
+            font-size: 1.7rem;
+            line-height: 1.4;
+          }
+
+          .order-form-container {
+            padding: 20px;
+          }
+
+          .footer-logo {
+            max-width: 100%; /* Sørger for at logoen tilpasser seg mobilenpent */
+          }
+        }
+
+        /* Animasjon */
+        @keyframes fadeUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-up {
+          animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toppmeny -->
+    <header id="mainHeader">
+        <div class="header-left">
+            <a href="#" class="logo">HUSTEGNER NINA KJØLSEN JERNÆS</a>
+        </div>
+
+        <div class="header-right">
+            <a href="#" class="scroll-to-top" title="Til toppen">&uarr;</a>
+            <ul class="nav-links">
+                <li><a href="#tegninger">Tegninger</a></li>
+                <li><a href="#bestill">Bestill</a></li>
+                <li><a href="#about">Om meg</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hovedseksjon (Hero) -->
+    <section class="hero animate-fade-up">
+        <span class="hero-subtitle">Med kjærlighet for eldre hus</span>
+        <h1 class="hero-title">Formet av generasjoner, tegnet for evigheten</h1>
+    </section>
+
+    <!-- Tegninger-seksjon -->
+    <section id="tegninger">
+        <div class="section-header">
+            <span class="section-subtitle">Et utvalg av mine</span>
+            <h2 class="section-title">HUSTEGNINGER</h2>
+        </div>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted);">
+            Jeg tegner ditt gamle, vakre hus, med et perspektiv om å ta vare på det ekte. Et helhetlig blikk på atmosfære, detaljer og materialer.
+        </p>
+        <br><br>
+        <div class="card-grid">
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Bilde03.jpeg" alt="Husmannsplass fra 1753">
+                </div>
+                <div class="card-content">
+                    <span class="card-category">2026</span>
+                    <h3 class="card-title">Husmannsplass fra 1753</h3>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Bilde02.jpeg" alt="Direktørbolig på Næs">
+                </div>
+                <div class="card-content">
+                    <span class="card-category">2026</span>
+                    <h3 class="card-title">Direktørbolig på Næs</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestill-seksjon med skjema -->
+    <section id="bestill">
+        <div class="section-header">
+            <span class="section-subtitle">Slik gjør du en</span>
+            <h2 class="section-title">BESTILLING</h2>
+        </div>
+        
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 15px auto; color: var(--text-muted);">
+            Registrer din bestilling via skjemaet under. Legg gjerne ved en beskrivelse av bygget og historien bak. Jeg tar deretter kontakt, så finner vi ut av det sammen.
+        </p>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 15px auto; color: var(--text-muted);">
+            Pris vil avhenge av motiv og størrelse. Omtrentlige priser for A4 er kr. 1.400 og A3 kr. 2.900.
+        </p>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted); font-weight: 500;">
+            Bruk skjemaet under, så kommer jeg raskt tilbake til deg.
+        </p>
+
+        <!-- Bestillingsskjema -->
+        <div class="order-form-container">
+            <form action="https://formspree.io/f/mgaanzvq" method="POST" id="orderForm">
+                
+                <div class="form-group">
+                    <label for="name">Navn *</label>
+                    <input type="text" id="name" name="navn" required placeholder="Ditt fulle navn">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-postadresse *</label>
+                    <input type="email" id="email" name="email" required placeholder="din.epost@eksempel.no">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefonnummer (VALGFRITT)</label>
+                    <input type="tel" id="phone" name="telefon" placeholder="000 00 000">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Beskriv ønske og historien bak bygget *</label>
+                    <textarea id="message" name="beskrivelse" required placeholder="Fortell litt om huset, hvor det står, eller spesielle detaljer du ønsker at jeg skal fokusere på..."></textarea>
+                </div>
+
+                <!-- Ny sjekkboks for nyhetsbrev -->
+                <label class="form-checkbox-group">
+                    <input type="checkbox" name="nyhetsbrev" value="Ja">
+                    <span>Ja takk, send meg gjerne informasjon og oppdateringer om nye tegninger og prosjekter (nyhetsbrev).</span>
+                </label>
+
+                <button type="submit" class="btn-submit" id="submitBtn">Send henvendelse</button>
+                
+                <!-- Bekreftelsesmelding som dukker opp her -->
+                <div id="formStatus"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Om meg-seksjon -->
+    <section id="about">
+        <div class="section-header">
+            <span class="section-subtitle">Om meg</span>
+            <h2 class="section-title">HUSTEGNEREN</h2>
+        </div>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted);">
+            Jeg brenner for å ta vare på historien som sitter i veggene på eldre hus og gårdstun. Gjennom pennen og penselen forsøker jeg å fange den unike sjelen og særpreget til hvert enkelt byggverk.
+        </p>
+
+        <!-- Bilde under om meg-teksten -->
+        <div class="about-image-container">
+            <img src="OmBilde.jpeg" alt="Hustegner Nina Kjølsen Jernæs">
+        </div>
+    </section>
+
+    <!-- Footer / Logo-seksjon -->
+    <footer id="kontakt">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Hustegner Nina Kjølsen Jernæs</h4>
+                <p>Personlige og detaljerte tegninger av eldre hus, gårdstun og historiske bygninger med sjel.</p>
+            </div>
+            <div class="footer-col" style="display: flex; justify-content: flex-end;">
+                <img src="logo.png" alt="Hustegner Nina Kjølsen Jernæs Logo" class="footer-logo">
+            </div>
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="footer-bottom">
+            <p>Designet og utviklet av Yngve Jernæs</p>
+            <p>&copy; 2026 Hustegner Nina Kjølsen Jernæs. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Skript for scrolling, bildebeskyttelse og AJAX-skjema -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 80) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Deaktiver høyreklikk på bilder for å beskytte dem
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('contextmenu', e => {
+                e.preventDefault();
+                alert("Bildene er beskyttet av opphavsrett.");
+            });
+        });
+
+        // Håndtering av skjema-innsending uten å forlate siden (AJAX)
+        var form = document.getElementById("orderForm");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            var status = document.getElementById("formStatus");
+            var btn = document.getElementById("submitBtn");
+            var data = new FormData(event.target);
+            
+            btn.disabled = true;
+            btn.textContent = "Sender...";
+
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    status.style.display = "block";
+                    status.innerHTML = "Takk for din henvendelse! Meldingen er sendt, og jeg tar kontakt med deg snart.";
+                    form.reset();
+                    btn.disabled = false;
+                    btn.textContent = "Send henvendelse";
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.style.display = "block";
+                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.style.display = "block";
+                            status.innerHTML = "Beklager, det oppstod en feil ved innsending. Prøv igjen senere.";
+                        }
+                        btn.disabled = false;
+                        btn.textContent = "Send henvendelse";
+                    })
+                }
+            }).catch(error => {
+                status.style.display = "block";
+                status.innerHTML = "Beklager, det oppstod en nettverksfeil. Sjekk tilkoblingen din.";
+                btn.disabled = false;
+                btn.textContent = "Send henvendelse";
+            });
+        }
+        
+        form.addEventListener("submit", handleSubmit);
+    </script>
+
+</body>
+</html>
