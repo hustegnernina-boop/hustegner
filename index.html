@@ -189,6 +189,13 @@
           box-shadow: none;
         }
 
+        /* Sørg for at X-en ALLTID er hvit uansett om man har scrollet eller ikke */
+        .menu-toggle.active span,
+        header.scrolled .menu-toggle.active span {
+          background-color: #FFFFFF !important;
+          box-shadow: none;
+        }
+
         /* Animasjon for at hamburgeren blir til en X når den er aktiv */
         .menu-toggle.active span:nth-child(1) {
           transform: translateY(8px) rotate(45deg);
