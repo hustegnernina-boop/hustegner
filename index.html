@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hustegner Nina Kjølsen Jernæs | Personlige tegninger av gamle hus og gårdstun</title>
     <meta name="description" content="Få en personlig og detaljert tegning av ditt eldre hus eller gårdstun. Hustegner Nina Kjølsen Jernæs tar imot bestillinger fra hele landet.">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Noto Sans JP for hovedtekst + Caveat for den håndskrevne lappen -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         /* ==========================================================================
            GRUNNLEGGENDE STILER OG DESIGNFARGESYSTEM
@@ -126,16 +127,16 @@
           letter-spacing: 0.15em;
           text-decoration: none;
           color: var(--text-main);
-          display: none; /* Skjult som standard */
+          display: none;
           transition: var(--transition-smooth);
         }
 
         header.scrolled .top-logo {
-          display: none; /* Skjul bilde-logoen ved scrolling */
+          display: none;
         }
 
         header.scrolled .scrolled-title {
-          display: block; /* Vis tekst-tittelen ved scrolling */
+          display: block;
         }
 
         .nav-links {
@@ -159,7 +160,7 @@
           color: #E0D5C1;
         }
 
-        /* Hamburgermeny-knapp (skjult på desktop) */
+        /* Hamburgermeny-knapp */
         .menu-toggle {
           display: none;
           background: none;
@@ -196,7 +197,6 @@
           box-shadow: none;
         }
 
-        /* Animasjon for at hamburgeren blir til en X når den er aktiv */
         .menu-toggle.active span:nth-child(1) {
           transform: translateY(8px) rotate(45deg);
         }
@@ -233,7 +233,7 @@
           width: 100%;
           max-width: none !important;
           margin: 0 !important;
-          padding: 180px 20px 50px 20px;
+          padding: 140px 20px 60px 20px;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
@@ -271,11 +271,42 @@
         }
 
         .hero-title {
-          font-size: 4rem;
+          font-size: 3.8rem;
           font-weight: 350;
-          line-height: 1.4;
-          margin: 0 0 40px 0;
+          line-height: 1.35;
+          margin: 0;
           color: #FFFFFF;
+        }
+
+        /* Håndskrevet lapp (nå helt rett) */
+        .handwritten-note {
+          font-family: 'Caveat', cursive;
+          font-size: 1.3rem;
+          line-height: 1.35;
+          color: #2b231d;
+          background-image: url('Lapp.jpeg');
+          background-size: 100% 100%;
+          background-position: center;
+          background-repeat: no-repeat;
+          padding: 32px 50px 48px 50px;
+          max-width: 660px;
+          width: 100%;
+          margin-top: auto;
+          margin-bottom: 30px;
+          filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.25));
+          letter-spacing: 0.02em;
+        }
+
+        .handwritten-note a {
+          color: #6b4f3b;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          font-weight: 600;
+          transition: var(--transition-smooth);
+        }
+
+        .handwritten-note a:hover {
+          color: #2b231d;
         }
 
         /* Seksjoner generelt */
@@ -407,7 +438,6 @@
 
         .form-group input[type="text"],
         .form-group input[type="email"],
-        .form-group input[type="tel"],
         .form-group textarea {
           width: 100%;
           padding: 14px 16px;
@@ -473,13 +503,107 @@
         }
 
         /* Melding når skjema er sendt */
-        #formStatus {
+        #formStatus,
+        #newsletterStatus {
           margin-top: 20px;
           text-align: center;
           font-size: 0.95rem;
           color: var(--accent-color);
           font-weight: 500;
           display: none;
+        }
+
+        /* Nyhetsbrev-infoboks og utvidbart skjema */
+        .newsletter-info-box {
+          max-width: 700px;
+          margin: 35px auto 0 auto;
+          text-align: center;
+          color: var(--text-muted);
+          font-size: 0.95rem;
+        }
+
+        .newsletter-toggle-link {
+          color: var(--accent-color);
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: var(--transition-smooth);
+        }
+
+        .newsletter-toggle-link:hover {
+          color: var(--text-main);
+        }
+
+        .newsletter-signup-box {
+          display: none;
+          max-width: 700px;
+          margin: 25px auto 0 auto;
+          background: var(--surface-color);
+          padding: 35px 40px;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--border-color);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+          animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .newsletter-signup-box.active {
+          display: block;
+        }
+
+        /* Kundeomtaler */
+        .testimonials-wrapper {
+          max-width: 900px;
+          margin: 70px auto 0 auto;
+          padding-top: 50px;
+          border-top: 1px solid var(--border-color);
+        }
+
+        .testimonials-title {
+          text-align: center;
+          font-size: 1.35rem;
+          font-weight: 400;
+          color: var(--text-main);
+          margin: 0 0 35px 0;
+          letter-spacing: 0.08em;
+        }
+
+        .testimonials-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+          gap: 18px;
+        }
+
+        .testimonial-item {
+          background: var(--surface-color);
+          border: 1px solid var(--border-color);
+          border-radius: var(--radius-sm);
+          padding: 20px 24px;
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+          transition: var(--transition-smooth);
+        }
+
+        .testimonial-item:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .testimonial-star {
+          color: #E2B04A;
+          font-size: 1.15rem;
+          line-height: 1.4;
+          flex-shrink: 0;
+          user-select: none;
+        }
+
+        .testimonial-text {
+          margin: 0;
+          font-size: 0.92rem;
+          font-style: italic;
+          color: var(--text-main);
+          line-height: 1.65;
         }
 
         /* Footer Stiler */
@@ -550,7 +674,7 @@
           margin: 0;
         }
 
-        /* Mobil-tilpasninger (responsivt design) */
+        /* Mobil-tilpasninger */
         @media (max-width: 768px) {
           header {
             padding: 16px 20px;
@@ -584,7 +708,6 @@
             display: flex;
           }
 
-          /* Mobilmeny som glir pent ut fra høyre side (drawer-stil) eller ned fra headeren */
           .nav-links {
             position: fixed;
             top: 0;
@@ -619,16 +742,35 @@
           }
 
           .hero {
-            padding-top: 150px;
+            padding-top: 130px;
+            padding-bottom: 30px;
+          }
+
+          .hero-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 12px;
           }
 
           .hero-title {
-            font-size: 2.2rem;
-            line-height: 1.4;
+            font-size: 2.1rem;
+            line-height: 1.35;
           }
 
-          .order-form-container {
+          .handwritten-note {
+            font-size: 1.05rem;
+            padding: 22px 28px 34px 28px;
+            max-width: 95%;
+            margin-bottom: 20px;
+          }
+
+          .order-form-container,
+          .newsletter-signup-box {
             padding: 20px;
+          }
+
+          .testimonials-grid {
+            grid-template-columns: 1fr;
           }
 
           .footer-logo {
@@ -672,7 +814,7 @@
                 <span></span>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#tegninger" class="nav-item">Tegninger</a></li>
+                <li><a href="#produkter" class="nav-item">Produkter</a></li>
                 <li><a href="#bestill" class="nav-item">Bestill</a></li>
                 <li><a href="#about" class="nav-item">Om meg</a></li>
             </ul>
@@ -683,36 +825,103 @@
     <section class="hero animate-fade-up">
         <span class="hero-subtitle">Med kjærlighet for eldre hus</span>
         <h1 class="hero-title">Formet av generasjoner,<br> tegnet for evigheten</h1>
+        
+        <!-- Håndskrevet lapp (nå helt rett) -->
+        <div class="handwritten-note">
+            <a href="#bestill">Bestill</a> en unik tegning av et kulturmiljø eller et husportrett. En personlig gave til «den som har alt», eller noe kjært du selv vil forevige.<br>
+            <span style="display: block; margin-top: 6px; font-size: 0.95em;">PS! Du kan også bestille julekort/gratulasjonskort, logoer, minimalerier og mer.</span>
+        </div>
     </section>
 
-    <!-- Tegninger-seksjon -->
-    <section id="tegninger">
+    <!-- Produkter-seksjon -->
+    <section id="produkter">
         <div class="section-header">
             <span class="section-subtitle">Et utvalg av mine</span>
-            <h2 class="section-title">HUSTEGNINGER</h2>
+            <h2 class="section-title">PRODUKTER</h2>
         </div>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted);">
-            Jeg tegner ditt gamle, vakre hus, med et perspektiv om å ta vare på det ekte. Et helhetlig blikk på atmosfære, detaljer og materialer.
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 10px auto; color: var(--text-muted);">
+            Jeg tegner ditt gamle, vakre hus ut fra tilsendte fotografier. Jeg har et helhetlig blikk på atmosfære, detaljer og materialer for å fange stedets atmosfære og gir fra meg produkter av kvalitet. Ønsker du ny logo, et husportrett, eller en unik bryllupsinvitasjon? Ta kontakt via <a href="#bestill" style="color: var(--accent-color); text-decoration: underline;">bestillingsskjema</a> for å høre om muligheter for å skreddersy det du trenger!
         </p>
         <br><br>
         <div class="card-grid">
             <div class="content-card">
                 <div class="card-image-wrapper">
-                    <img src="Bilde03.jpeg" alt="Husmannsplass fra 1753">
+                    <img src="Bilde01.jpeg" alt="Akvarell i A3">
                 </div>
                 <div class="card-content">
-                    <span class="card-category">2026</span>
-                    <h3 class="card-title">Husmannsplass fra 1753</h3>
+                    <h3 class="card-title">Akvarell i A3</h3>
                 </div>
             </div>
 
             <div class="content-card">
                 <div class="card-image-wrapper">
-                    <img src="Bilde02.jpeg" alt="Direktørbolig på Næs">
+                    <img src="Bilde02.jpeg" alt="Akvarell i A4">
                 </div>
                 <div class="card-content">
-                    <span class="card-category">2026</span>
-                    <h3 class="card-title">Direktørbolig på Næs</h3>
+                    <h3 class="card-title">Akvarell i A4</h3>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Bilde03.jpeg" alt="Akvarell i A4">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Akvarell i A4</h3>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Bilde04.jpeg" alt="Akvarell i A3">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Akvarell i A3</h3>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="minimaleri01.jpeg" alt="Jeg kan også ramme inn med vintage-rammer">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Jeg kan også ramme inn med vintage-rammer</h3>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="minimaleri02.jpeg" alt="Minimalerier (6x9cm) kommer med vakker ramme og oppheng">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Minimalerier (6x9cm) kommer med vakker ramme og oppheng</h3>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Logo01.jpeg" alt="Logoer til foreninger og bedrifter">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Logoer til foreninger og bedrifter</h3>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Julekort.jpeg" alt="Julekort og gratulasjonskort kan bestilles">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Julekort og gratulasjonskort kan bestilles</h3>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-image-wrapper">
+                    <img src="Bilde05.jpeg" alt="Riksantikvarens kulturminnepris 2023">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Riksantikvarens kulturminnepris 2023</h3>
                 </div>
             </div>
         </div>
@@ -726,10 +935,10 @@
         </div>
         
         <p style="text-align: center; max-width: 700px; margin: 0 auto 15px auto; color: var(--text-muted);">
-            Registrer din bestilling via skjemaet under. Legg gjerne ved en beskrivelse av bygget og historien bak. Jeg tar deretter kontakt, så finner vi ut av det sammen.
+            Registrer din bestilling via skjemaet under. Legg ved en beskrivelse av produkt du ønsker. Jeg tar deretter kontakt, så finner vi ut av det sammen.
         </p>
         <p style="text-align: center; max-width: 700px; margin: 0 auto 15px auto; color: var(--text-muted);">
-            Pris vil avhenge av motiv og størrelse. Omtrentlige priser for A4 er kr. 1.400 og A3 kr. 2.900.
+            Pris vil avhenge av motiv og størrelse. Omtrentlige priser for A4 er kr. 1.500 og A3 kr. 2.800. Pris for minimaleri med ramme og oppheng er kr. 900. Pris for julekort/gratulasjonskort er kr. 350 for 10 stk. Alle priser ink frakt (Norge).
         </p>
         <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted); font-weight: 500;">
             Bruk skjemaet under, så kommer jeg raskt tilbake til deg.
@@ -750,13 +959,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Telefonnummer (VALGFRITT)</label>
-                    <input type="tel" id="phone" name="telefon" placeholder="000 00 000">
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Beskriv ønske og historien bak bygget *</label>
-                    <textarea id="message" name="beskrivelse" required placeholder="Fortell litt om huset, hvor det står, eller spesielle detaljer du ønsker at jeg skal fokusere på..."></textarea>
+                    <label for="message">Beskriv bestilling og produkt som ønskes *</label>
+                    <textarea id="message" name="beskrivelse" required placeholder="Fortell hva du ønsker å bestille..."></textarea>
                 </div>
 
                 <!-- Ny sjekkboks for nyhetsbrev -->
@@ -771,6 +975,86 @@
                 <div id="formStatus"></div>
             </form>
         </div>
+
+        <!-- Nyhetsbrev-tekst og utvidbart påmeldingsskjema -->
+        <div class="newsletter-info-box">
+            <p>
+                <strong style="color: var(--text-main);">Nyhetsbrev</strong> kommer i løpet av første uka hver måned med månedens tegning, en personlig hilsen og oppdatering av de siste prosjektene. <a href="#" id="toggleNewsletter" class="newsletter-toggle-link">Meld deg på her.</a> Første nyhetsbrev sendes ut i januar 2027.
+            </p>
+        </div>
+
+        <div class="newsletter-signup-box" id="newsletterBox">
+            <form action="https://formspree.io/f/mgaanzvq" method="POST" id="newsletterForm">
+                <input type="hidden" name="emne" value="Ny påmelding til nyhetsbrev">
+                <div class="form-group" style="margin-bottom: 18px;">
+                    <label for="newsletterEmail">Din e-postadresse *</label>
+                    <input type="email" id="newsletterEmail" name="email" required placeholder="din.epost@eksempel.no">
+                </div>
+                <button type="submit" class="btn-submit" id="newsletterBtn">Meld meg på nyhetsbrev</button>
+                <div id="newsletterStatus"></div>
+            </form>
+        </div>
+
+        <!-- Kundeomtaler -->
+        <div class="testimonials-wrapper">
+            <h3 class="testimonials-title">Dette sier kundene mine:</h3>
+            <div class="testimonials-grid">
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Mottok tegningen i dag, og jeg ble så fornøyd at det faktisk kom etpar tårer! Igjen, tusen tusen hjertelig takk!»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Vi er så fornøyde med bildene vi kjøpte av deg!»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Åå, så vakkert! Du er fantastisk flink. Har ingenting å utsette, helt perfekt!»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Bildet var heilt perfekt! Mor mi var imponert over alle detaljer du hadde fått med»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Bildene henger allerede oppe, så vakkert! Elsker dem»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Tusen takk Nina! For et håndverk! Helt nydelig og så rørende å få se det på nært hold og på papir! Vakkert!»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Helt nydelig! Tusen takk for at du kunne gjøre det på så kort varsel»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Tusen takk, vi kunne ikke vært mer fornøyde. Det er veldig stas å henge de opp på veggen endelig»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Helt perfekt, jeg elsker det! Milde måne, jeg er sååå fornøyd»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Åh, den ble bare så fin! Du er så dyktig, helt fantastisk. Mamma og pappa kommer til å bli så rørt når de får den til jul, de er så glade i den hytta»</p>
+                </div>
+
+                <div class="testimonial-item">
+                    <span class="testimonial-star" aria-hidden="true">&#9733;</span>
+                    <p class="testimonial-text">«Tegningen kom i posten i dag, tusen takk igjen! Utrolig vakker. Du er kjempeflink»</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Om meg-seksjon -->
@@ -779,8 +1063,8 @@
             <span class="section-subtitle">Om meg</span>
             <h2 class="section-title">HUSTEGNEREN</h2>
         </div>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted);">
-            Jeg brenner for å ta vare på historien som sitter i veggene på eldre hus og gårdstun. Gjennom pennen og penselen forsøker jeg å fange den unike sjelen og særpreget til hvert enkelt byggverk.
+        <p style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted); line-height: 1.9;">
+            Ved siden av å jobbe heltid med kulturarv så driver jeg dette lille enkeltpersonforetaket som ble opprettet i 2024. Jeg har alltid vært opptatt av detaljer, og gjennom tidligere arbeid som malerikonservator har jeg god kjennskap til materialers ulike egenskaper, om pigmenter og fargebruk. Jeg brenner for bevaring av eldre bebyggelse og heier på alle dere som har et restaureringsprosjekt på gang! Kanskje et husportrett kan bidra til at man blir enda mer stolt av huset som er bevart gjennom flere generasjoner?
         </p>
 
         <!-- Bilde under om meg-teksten -->
@@ -795,6 +1079,7 @@
             <div class="footer-col">
                 <h4>Hustegner Nina Kjølsen Jernæs</h4>
                 <p>Personlige og detaljerte tegninger av eldre hus, gårdstun og historiske bygninger med sjel.</p>
+                <p style="margin-top: 12px; color: #888888; font-size: 0.75rem; letter-spacing: 0.1em;">Organisasjonsnummer 933 068 102</p>
             </div>
             <div class="footer-col" style="display: flex; justify-content: flex-end;">
                 <img src="Logo.png" alt="Hustegner Nina Kjølsen Jernæs Logo" class="footer-logo">
@@ -845,53 +1130,83 @@
             });
         });
 
-        // Håndtering av skjema-innsending uten å forlate siden (AJAX)
-        var form = document.getElementById("orderForm");
-        
-        async function handleSubmit(event) {
-            event.preventDefault();
-            var status = document.getElementById("formStatus");
-            var btn = document.getElementById("submitBtn");
-            var data = new FormData(event.target);
-            
-            btn.disabled = true;
-            btn.textContent = "Sender...";
+        // Vis/skjul påmeldingsfeltet for nyhetsbrev
+        const toggleNewsletter = document.getElementById('toggleNewsletter');
+        const newsletterBox = document.getElementById('newsletterBox');
+        const newsletterEmailInput = document.getElementById('newsletterEmail');
 
-            fetch(event.target.action, {
-                method: form.method,
-                body: data,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    status.style.display = "block";
-                    status.innerHTML = "Takk for din henvendelse! Meldingen er sendt, og jeg tar kontakt med deg snart.";
-                    form.reset();
-                    btn.disabled = false;
-                    btn.textContent = "Send henvendelse";
-                } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            status.style.display = "block";
-                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                        } else {
-                            status.style.display = "block";
-                            status.innerHTML = "Beklager, det oppstod en feil ved innsending. Prøv igjen senere.";
-                        }
+        toggleNewsletter.addEventListener('click', function(e) {
+            e.preventDefault();
+            newsletterBox.classList.toggle('active');
+            if (newsletterBox.classList.contains('active')) {
+                newsletterEmailInput.focus();
+            }
+        });
+
+        // Håndtering av skjema-innsending uten å forlate siden (AJAX)
+        function setupAjaxForm(formId, statusId, btnId, defaultBtnText, successMessage) {
+            const form = document.getElementById(formId);
+            if (!form) return;
+
+            form.addEventListener("submit", async function(event) {
+                event.preventDefault();
+                const status = document.getElementById(statusId);
+                const btn = document.getElementById(btnId);
+                const data = new FormData(event.target);
+                
+                btn.disabled = true;
+                btn.textContent = "Sender...";
+
+                fetch(event.target.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        status.style.display = "block";
+                        status.innerHTML = successMessage;
+                        form.reset();
                         btn.disabled = false;
-                        btn.textContent = "Send henvendelse";
-                    })
-                }
-            }).catch(error => {
-                status.style.display = "block";
-                status.innerHTML = "Beklager, det oppstod en nettverksfeil. Sjekk tilkoblingen din.";
-                btn.disabled = false;
-                btn.textContent = "Send henvendelse";
+                        btn.textContent = defaultBtnText;
+                    } else {
+                        response.json().then(data => {
+                            if (Object.hasOwn(data, 'errors')) {
+                                status.style.display = "block";
+                                status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                            } else {
+                                status.style.display = "block";
+                                status.innerHTML = "Beklager, det oppstod en feil ved innsending. Prøv igjen senere.";
+                            }
+                            btn.disabled = false;
+                            btn.textContent = defaultBtnText;
+                        });
+                    }
+                }).catch(error => {
+                    status.style.display = "block";
+                    status.innerHTML = "Beklager, det oppstod en nettverksfeil. Sjekk tilkoblingen din.";
+                    btn.disabled = false;
+                    btn.textContent = defaultBtnText;
+                });
             });
         }
-        
-        form.addEventListener("submit", handleSubmit);
+
+        setupAjaxForm(
+            "orderForm",
+            "formStatus",
+            "submitBtn",
+            "Send henvendelse",
+            "Takk for din henvendelse! Meldingen er sendt, og jeg tar kontakt med deg snart."
+        );
+
+        setupAjaxForm(
+            "newsletterForm",
+            "newsletterStatus",
+            "newsletterBtn",
+            "Meld meg på nyhetsbrev",
+            "Takk for påmeldingen! Du er nå registrert for nyhetsbrevet."
+        );
     </script>
 
 </body>
